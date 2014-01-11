@@ -1,0 +1,13 @@
+{
+  "name": "Firebac",
+  "version": "0.0.0",
+  "authors": [
+    "Sam Duvall <sam@rocketwhale.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "backbone.marionette": "~1.4.1",
+    "backbone": "~1.1.0",
+    "jquery": "~2.0.3"
+  }
+}
