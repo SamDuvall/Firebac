@@ -8,11 +8,9 @@ app.use('/css', express.static(path.join(__dirname, 'css/build')));
 app.use('/js', express.static(path.join(__dirname, 'js/build')));
 
 var consolidate = require('consolidate');
-var partials = require('express-partials');
 app.engine('html', consolidate.underscore);
 app.engine('txt', consolidate.underscore);
 app.set('view engine', 'html');
-app.use(partials());
 
 var routes = require('./app/routes');
 routes(app);

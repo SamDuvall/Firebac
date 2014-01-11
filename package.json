@@ -15,7 +15,6 @@
     "bower": "~1.2.8",
     "browserify": "~3.18.0",
     "express": "3.4.x",
-    "express-partials": "0.1.x",
     "consolidate": "0.9.x"
   },
   "main": "master.js",

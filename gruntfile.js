@@ -19,7 +19,10 @@ module.exports = function(grunt) {
     browserify: {
       application: {
         src: ['js/application.js'],
-        dest: 'js/build/application.js'
+        dest: 'js/build/application.js',
+        options: {
+          debug: true
+        }
       }
     },
 
@@ -44,7 +47,7 @@ module.exports = function(grunt) {
         }
       },
       js: {
-        files: ['js/*.js'],
+        files: ['js/*.js', 'js/model/**/*.js', 'js/view/**/*.js'],
         tasks: ['browserify'],
         options: {
           spawn: false,
