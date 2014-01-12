@@ -1,3 +1,5 @@
+require('./config');
+
 var dataRef = new Firebase("https://rbac.firebaseio.com/organizations");
 
 app = new Marionette.Application();
@@ -6,9 +8,16 @@ app.addRegions({
 });
 
 app.addInitializer(function() {
-  var View = require('./view/organization/crud');
-  var view = new View();
-  app.mainRegion.show(view);
+  // Create the routers
+  var controllers = [
+    require('./view/organization/controller')
+  ];
+  controllers.forEach(function (Router) {
+    var router = new Router();
+  });
+
+  // Start the app
+  Backbone.history.start({ pushState: true });
 });
 
 $(function () {
