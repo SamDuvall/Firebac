@@ -7,6 +7,10 @@ app.addRegions({
   mainRegion: '#main'
 });
 
+Marionette.Renderer.render = function (template, data) {
+  return JST[template](data);
+};
+
 app.addInitializer(function() {
   // Create the routers
   var controllers = [

@@ -16,6 +16,22 @@ module.exports = function(grunt) {
       }
     },
 
+    jst: {
+      compile: {
+        options: {
+          prettify: true,
+          processName: function(filename) {
+            var regEx = /app\/js\/view\/(.+).(?:html)/;
+            var match = regEx.exec(filename);
+            return match[1];
+          }
+        },
+        files: {
+          "build/js/templates.js": ["app/js/view/**/*.html"]
+        }
+      }
+    },
+
     browserify: {
       application: {
         src: ['app/js/application.js'],
@@ -52,13 +68,20 @@ module.exports = function(grunt) {
         options: {
           spawn: false,
         }
+      },
+      jst: {
+        files: ['app/js/**/*.html'],
+        tasks: ['jst'],
+        options: {
+          spawn: false,
+        }
       }
     }
   });
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('default', ['sass', 'browserify', 'bower_concat']);
+  grunt.registerTask('default', ['sass', 'jst', 'browserify', 'bower_concat']);
 
   grunt.registerTask('dev', ['watch']);
 };

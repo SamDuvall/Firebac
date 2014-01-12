@@ -1,17 +1,12 @@
 var Organization = require('../../model/organization');
 
-var MemberView = Backbone.Marionette.CollectionView.extend({
+var MemberView = Backbone.Marionette.ItemView.extend({
   tagName: 'li',
   className: 'member',
+  template: 'organization/member',
 
   events: {
     'click .remove-member': 'removeMember'
-  },
-
-  render: function() {
-    this.$el.html(this.model.id);
-    this.$el.append('<button type="button" class="remove-member">x</member>');
-    return this;
   },
 
   removeMember: function() {
@@ -25,30 +20,26 @@ var MembersView = Backbone.Marionette.CollectionView.extend({
   itemView: MemberView
 });
 
-var ItemView = Backbone.Marionette.CollectionView.extend({
+var ItemView = Backbone.Marionette.ItemView.extend({
   tagName: 'li',
   className: 'organization',
+  template: 'organization/entry',
 
   events: {
     'click .remove-organization': 'removeOrganization',
     'click .add-member': 'addMember'
   },
 
-  render: function() {
-    this.$el.html(this.model.id);
-    this.$el.append('<button type="button" class="remove-organization">x</member>');
-
-    var list = new MembersView({
+  onRender: function() {
+    var members = new MembersView({
+      el: this.$el.find('ul.members'),
       collection: this.model.members
     });
-    this.$el.append(list.render().el);
-
-    this.$el.append('<button type="button" class="add-member">Add Member</member>');
-    return this;
+    members.render();
   },
 
   removeOrganization: function() {
-    this.model.destroy();
+    this.model.collection.remove(this.model);
   },
 
   addMember: function() {
@@ -61,10 +52,39 @@ var ItemView = Backbone.Marionette.CollectionView.extend({
 var CollectionView = Backbone.Marionette.CollectionView.extend({
   tagName: 'ul',
   className: 'organizations',
-  itemView: ItemView,
+  itemView: ItemView
+});
+
+var View = Backbone.Marionette.View.extend({
+  tagName: 'article',
+  className: 'organizations',
+  template: 'organization/index',
+
+  events: {
+    'click .add-organization': 'addOrganization'
+  },
+
   initialize: function() {
-    this.collection = new Organization.Collection();
+    this.organizations = new Organization.Collection();
+  },
+
+  render: function() {
+    this.$el.html(JST[this.template]());
+
+    var organizations = new CollectionView({
+      el: this.$el.find('ul.organizations'),
+      collection: this.organizations
+    });
+    organizations.render();
+
+    return this;
+  },
+
+  addOrganization: function() {
+    this.organizations.create({
+      id: 'new-organization'
+    })
   }
 });
 
-module.exports = CollectionView;
+module.exports = View;
