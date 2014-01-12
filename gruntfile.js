@@ -4,14 +4,13 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
-    sass: {
-      dist: {
+    less: {
+      development: {
         options: {
-          // cssmin will minify later
-          style: 'expanded'
+          paths: ["app/css"]
         },
         files: {
-          'build/css/application.css': 'app/css/application.scss'
+          "build/css/application.css": "app/css/application.less"
         }
       }
     },
@@ -56,8 +55,8 @@ module.exports = function(grunt) {
         livereload: true,
       },
       css: {
-        files: ['app/css/**/*.scss'],
-        tasks: ['sass'],
+        files: ['app/css/**/*.less'],
+        tasks: ['less'],
         options: {
           spawn: false,
         }
@@ -81,7 +80,7 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('default', ['sass', 'jst', 'browserify', 'bower_concat']);
+  grunt.registerTask('default', ['less', 'jst', 'browserify', 'bower_concat']);
 
   grunt.registerTask('dev', ['default', 'watch']);
 };
