@@ -11,15 +11,15 @@ module.exports = function(grunt) {
           style: 'expanded'
         },
         files: {
-          'css/build/application.css': 'css/application.scss'
+          'build/css/application.css': 'app/css/application.scss'
         }
       }
     },
 
     browserify: {
       application: {
-        src: ['js/application.js'],
-        dest: 'js/build/application.js',
+        src: ['app/js/application.js'],
+        dest: 'build/js/application.js',
         options: {
           debug: true
         }
@@ -28,7 +28,7 @@ module.exports = function(grunt) {
 
     bower_concat: {
       all: {
-        dest: 'js/build/lib.js',
+        dest: 'build/js/lib.js',
         dependencies: {
           'backbone': ['jquery', 'underscore']
         },
@@ -40,14 +40,14 @@ module.exports = function(grunt) {
         livereload: true,
       },
       css: {
-        files: ['css/*.scss'],
+        files: ['app/css/**/*.scss'],
         tasks: ['sass'],
         options: {
           spawn: false,
         }
       },
       js: {
-        files: ['js/*.js', 'js/model/**/*.js', 'js/view/**/*.js'],
+        files: ['app/js/**/*.js'],
         tasks: ['browserify'],
         options: {
           spawn: false,

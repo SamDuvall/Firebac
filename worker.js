@@ -4,13 +4,7 @@ var config = require('./config/config');
 
 var app = express();
 if(!config.env.test) app.use(express.logger({format: 'dev', stream: process.stdout}));
-app.use('/css', express.static(path.join(__dirname, 'css/build')));
-app.use('/js', express.static(path.join(__dirname, 'js/build')));
-
-var consolidate = require('consolidate');
-app.engine('html', consolidate.underscore);
-app.engine('txt', consolidate.underscore);
-app.set('view engine', 'html');
+app.use(express.static(path.join(__dirname, 'build')));
 
 var routes = require('./app/routes');
 routes(app);

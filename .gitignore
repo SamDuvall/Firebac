@@ -19,5 +19,4 @@ config/config.yml
 
 # Compiled
 .sass-cache/
-css/build
-js/build
+build/

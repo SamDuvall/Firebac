@@ -14,8 +14,7 @@
     "js-yaml": "0.3.7",
     "bower": "~1.2.8",
     "browserify": "~3.18.0",
-    "express": "3.4.x",
-    "consolidate": "0.9.x"
+    "express": "3.4.x"
   },
   "main": "master.js",
   "scripts": {
