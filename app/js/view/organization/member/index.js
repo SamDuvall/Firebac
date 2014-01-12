@@ -1,6 +1,6 @@
 var ItemView = Backbone.Marionette.ItemView.extend({
   tagName: 'li',
-  className: 'member',
+  className: 'item member',
   template: 'organization/member/entry',
 
   bindings: {
