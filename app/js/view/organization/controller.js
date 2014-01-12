@@ -1,9 +1,12 @@
 var Organization = require('../../model/organization');
 
 var controller = {
-  index: function() {
-    var View = require('./index');
-    var view = new View();
+  organization: function(id) {
+    var model = new Organization({id: id});
+    var View = require('./show');
+    var view = new View({
+      model: model
+    });
     app.mainRegion.show(view);
   }
 };
@@ -11,8 +14,7 @@ var controller = {
 var Router = Marionette.AppRouter.extend({
   controller: controller,
   appRoutes: {
-    '': 'index',
-    'organizations': 'index'
+    'organizations/:id': 'organization'
   }
 });
 

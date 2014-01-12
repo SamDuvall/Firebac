@@ -14,6 +14,7 @@ Marionette.Renderer.render = function (template, data) {
 app.addInitializer(function() {
   // Create the routers
   var controllers = [
+    require('./view/admin/controller'),
     require('./view/organization/controller')
   ];
   controllers.forEach(function (Router) {
@@ -25,5 +26,21 @@ app.addInitializer(function() {
 });
 
 $(function () {
+  $.ajaxSetup({
+    cache: false, // Don't cache requests
+    dataType: 'json'
+  });
+
+  // If this is a modified click allow the browser-default behavior to take over
+  var updatePushState = function (event) {
+    if (event.metaKey) return;
+    var href = $(this).attr('href');
+    if (href && href[0] == '/') {
+      Backbone.history.navigate(href);
+      return false;
+    }
+  }
+  $(document).on("click", "a:not([data-history=false],[target=_blank])", updatePushState);
+
   app.start();
 });
