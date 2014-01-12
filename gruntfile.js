@@ -83,5 +83,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['sass', 'jst', 'browserify', 'bower_concat']);
 
-  grunt.registerTask('dev', ['watch']);
+  grunt.registerTask('dev', ['default', 'watch']);
 };
