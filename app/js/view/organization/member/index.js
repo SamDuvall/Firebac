@@ -3,6 +3,10 @@ var ItemView = Backbone.Marionette.ItemView.extend({
   className: 'member',
   template: 'organization/member/entry',
 
+  bindings: {
+    '.email': 'email'
+  },
+
   events: {
     'click .remove-member': 'removeMember'
   },
