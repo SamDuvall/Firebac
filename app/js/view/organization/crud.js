@@ -15,7 +15,7 @@ var MemberView = Backbone.Marionette.CollectionView.extend({
   },
 
   removeMember: function() {
-    this.model.destroy();
+    this.model.collection.remove(this.model);
   }
 });
 
